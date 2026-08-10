@@ -1,12 +1,10 @@
-# SFG Beer Works - RESTful Brewery Service
+Creating K8s deployment:
 
-This project is to support learning about Restful APIs. 
+kubectl create deployment kbe-rest --image springframeworkguru/kbe-rest-brewery --dry-run=client  -o=yaml > deployment.yaml
 
-You can access the API documentation [here](https://sfg-beer-works.github.io/brewery-api/#tag/Beer-Service) 
+kubectl create service clusterip kbe-rest --tcp=8080:8080 --dry-run=client -o=yaml > service.yaml
 
-## Connect with Spring Framework Guru
-* Spring Framework Guru [Blog](https://springframework.guru/)
-* Subscribe to Spring Framework Guru on [YouTube](https://www.youtube.com/channel/UCrXb8NaMPQCQkT8yMP_hSkw)
-* Like Spring Framework Guru on [Facebook](https://www.facebook.com/springframeworkguru/)
-* Follow Spring Framework Guru on [Twitter](https://twitter.com/spring_guru)
-* Connect with John Thompson on [LinkedIn](http://www.linkedin.com/in/springguru)
+kubectl port-forward service/kbe-rest 8080:8080
+
+curl localhost:8080/actuator/health
+
